@@ -6,15 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | KID</title>
+  <title>符号执行--angr初学分析 | KID</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="KID">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="0x1，简介​    angr在ctf中密码，逆向，以及pwn中都会有涉及，它可以让我们拜托那些头大的算法，单纯知道开始以及结束，暴力破解的方法来得到我们最后的结果，不得不说，在某些方面很方便，但也有局限性，当遇到死循环或者其他中断情况就不太行，而且计算量大时过于费时对于电脑配置也有些要求（我的电脑每次跑都）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="符号执行--angr初学分析">
+<meta property="og:url" content="http://yoursite.com/2020/01/21/%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C-angr%E5%88%9D%E5%AD%A6%E5%88%86%E6%9E%90/index.html">
 <meta property="og:site_name" content="KID">
+<meta property="og:description" content="0x1，简介​    angr在ctf中密码，逆向，以及pwn中都会有涉及，它可以让我们拜托那些头大的算法，单纯知道开始以及结束，暴力破解的方法来得到我们最后的结果，不得不说，在某些方面很方便，但也有局限性，当遇到死循环或者其他中断情况就不太行，而且计算量大时过于费时对于电脑配置也有些要求（我的电脑每次跑都）。">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/img/2/2.1.png">
+<meta property="og:image" content="http://yoursite.com/img/2/2.2.png">
+<meta property="og:image" content="http://yoursite.com/img/2/2.3.png">
+<meta property="og:image" content="http://yoursite.com/img/2/2.4.png">
+<meta property="og:image" content="http://yoursite.com/img/2/2.5.png">
+<meta property="og:image" content="http://yoursite.com/img/2/2.6.png">
+<meta property="article:published_time" content="2020-01-21T13:00:06.000Z">
+<meta property="article:modified_time" content="2020-01-21T13:11:34.193Z">
 <meta property="article:author" content="KID">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/img/2/2.1.png">
   
     <link rel="alternative" href="/atom.xml" title="KID" type="application/atom+xml">
   
@@ -124,103 +135,155 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-符号执行-angr初学分析" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      符号执行--angr初学分析
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/01/21/%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C-angr%E5%88%9D%E5%AD%A6%E5%88%86%E6%9E%90/" class="archive-article-date">
+
+        
+        <a href="/2020/01/21/%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C-angr%E5%88%9D%E5%AD%A6%E5%88%86%E6%9E%90/" class="archive-article-date">
   	<time datetime="2020-01-21T13:00:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-21</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/21/%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C-angr%E5%88%9D%E5%AD%A6%E5%88%86%E6%9E%90/">符号执行--angr初学分析</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="0x1，简介"><a href="#0x1，简介" class="headerlink" title="0x1，简介"></a>0x1，简介</h3><p>​    angr在ctf中密码，逆向，以及pwn中都会有涉及，它可以让我们拜托那些头大的算法，单纯知道开始以及结束，暴力破解的方法来得到我们最后的结果，不得不说，在某些方面很方便，但也有局限性，当遇到死循环或者其他中断情况就不太行，而且计算量大时过于费时对于电脑配置也有些要求（我的电脑每次跑都）。</p>
+<a id="more"></a>
 
-        <div class="article-info info-on-right">
-          
-          
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h3 id="0x2，安装"><a href="#0x2，安装" class="headerlink" title="0x2，安装"></a>0x2，安装</h3><p>​    python的一个模块，自行安装百度，安装过程有点坑。</p>
+<h3 id="0x3，实例分析"><a href="#0x3，实例分析" class="headerlink" title="0x3，实例分析"></a>0x3，实例分析</h3><h4 id="r100（蓝鲸ctf的一道逆向）"><a href="#r100（蓝鲸ctf的一道逆向）" class="headerlink" title="r100（蓝鲸ctf的一道逆向）"></a>r100（蓝鲸ctf的一道逆向）</h4><p>这道逆向本身算法逆向并不难，这里用angr来求解：</p>
+<p><img src="/img/2/2.1.png" alt=""></p>
+<p>64位程序，把丢在ida中分析：</p>
+<p><img src="/img/2/2.2.png" alt=""></p>
+<p>此为加密函数，这里我们不分析他的算法</p>
+<p><img src="/img/2/2.3.png" alt=""></p>
+<p>主函数中有两个分支我们只要他输出’Nice!’就行了</p>
+<p><img src="/img/2/2.4.png" alt=""></p>
+<p>这是正确的地址。</p>
+<p><img src="/img/2/2.5.png" alt=""></p>
+<p>这是错误的地址。</p>
+<p>我们需要让他执行到正确的地址附近，并打印出flag。</p>
+<p>脚本如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> angr <span class="comment"># 导入angr库</span></span><br><span class="line"></span><br><span class="line">p=angr.Project(<span class="string">'./r100'</span>,auto_load_libs=<span class="literal">False</span>) <span class="comment"># 加载程序</span></span><br><span class="line"></span><br><span class="line">state=p.factory.entry_state() <span class="comment"># 创建一个状态,默认为程序的入口地址</span></span><br><span class="line"></span><br><span class="line">simgr=p.factory.simgr(state) <span class="comment"># 创建一个模拟器用来模拟程序执行,遍历所有路径</span></span><br><span class="line"></span><br><span class="line">res=simgr.explore(find=<span class="number">0x400844</span>,avoid=<span class="number">0x400855</span>) <span class="comment"># 约束执行的流程，0x400844为打印正确，0x400855附近即为打印错误的地址</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> (res.found[<span class="number">0</span>].posix.dumps(<span class="number">3</span>)) <span class="comment"># 打印found的第一个结果</span></span><br></pre></td></tr></table></figure>
 
+<p><img src="/img/2/2.6.png" alt=""></p>
+<p>密码时code_Talkers</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/01/21/%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C-angr%E5%88%9D%E5%AD%A6%E5%88%86%E6%9E%90/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/01/19/CVE-2019-0708%E5%A4%8D%E7%8E%B0%E5%AE%9E%E9%AA%8C/" class="archive-article-date">
-  	<time datetime="2020-01-19T14:14:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-19</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/01/19/CVE-2019-0708%E5%A4%8D%E7%8E%B0%E5%AE%9E%E9%AA%8C/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">CVE-2019-0708复现实验</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/19/CVE-2019-0708%E5%A4%8D%E7%8E%B0%E5%AE%9E%E9%AA%8C/">CVE-2019-0708复现实验</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/01/17/hello-world/" class="archive-article-date">
-  	<time datetime="2020-01-17T13:21:17.710Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/17/hello-world/">Hello World</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -243,8 +306,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
